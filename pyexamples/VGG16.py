@@ -12,37 +12,41 @@ arch = [
     to_begin(),
 
     # inputmy_project
-    to_input('../examples/fcn8s/cats.jpg'),
+    # to_input('../examples/fcn8s/cats.jpg'),
+    # Pl@ntnet image: 1355936,Cirsium arvense,Cirsium,3418,12075
+
+    to_input('cf7315479b5bebc714b824045f729868d8b6ca73.jpg'),
+    # to_input('d80a7c1334c62039e8c9b6d0b98256c16c0de30e.jpg'),
 
     # conv1
-    to_ConvConvRelu(name='cr1', s_filer=224, n_filer=(64, 64), offset="(0,0,0)",
+    to_ConvConvRelu(name='cr1', s_filer=224, n_filer=(64, 64), offset="(0.3,0,0)",
                     to="(0,0,0)", width=(2, 2), height=40, depth=40, caption="conv1"),
-    to_Pool(name="p1", offset="(0,0,0)", to="(cr1-east)",
-            width=1, height=35, depth=35, opacity=0.5),
+    to_Pool(name="p1", offset="(0.2,0,0)", to="(cr1-east)",
+            width=2, height=35, depth=35, opacity=0.5),
 
     # conv2
     to_ConvConvRelu(name='cr2', s_filer=112, n_filer=(128, 128), offset="(3.4,0,0)",
-                    to="(p1-east)", width=(4, 4), height=35, depth=35, caption="conv2"),
+                    to="(p1-east)", width=(3, 3), height=36, depth=36, caption="conv2"),
     to_Pool(name="p2", offset="(0,0,0)", to="(cr2-east)",
-            width=1, height=30, depth=30, opacity=0.5),
+            width=3, height=30, depth=30, opacity=0.5),
 
     # conv3
     to_ConvConvRelu(name='cr3', s_filer=56, n_filer=("256", "256", "256"), offset="(3,0,0)",
-                    to="(p2-east)", width=(4, 4, 4), height=30, depth=30, caption="conv3"),
+                    to="(p2-east)", width=(4, 4, 4), height=20, depth=20, caption="conv3"),
     to_Pool(name="p3", offset="(0,0,0)", to="(cr3-east)",
-            width=1, height=23, depth=23, opacity=0.5),
+            width=4, height=16, depth=16, opacity=0.5),
 
     # conv4
     to_ConvConvRelu(name='cr4', s_filer=28, n_filer=("512", "512", "512"), offset="(2.6,0,0)",
-                    to="(p3-east)", width=(4, 4, 4), height=23, depth=23, caption="conv4"),
+                    to="(p3-east)", width=(5, 5, 5), height=16, depth=16, caption="conv4"),
     to_Pool(name="p4", offset="(0,0,0)", to="(cr4-east)",
-            width=1, height=15, depth=15, opacity=0.5),
+            width=5, height=12.8, depth=12.8, opacity=0.5),
 
     # conv5
     to_ConvConvRelu(name='cr5', s_filer=14, n_filer=("512", "512", "512"), offset="(2,0,0)",
-                    to="(p4-east)", width=(4, 4, 4), height=15, depth=15, caption="conv5"),
+                    to="(p4-east)", width=(6, 6, 6), height=10, depth=10, caption="conv5"),
     to_Pool(name="p5", offset="(0,0,0)", to="(cr5-east)",
-            width=1, height=10, depth=10, opacity=0.5),
+            width=6, height=8, depth=8, opacity=0.5),
 
     # flatten
     to_FullyConnected(name="fl", s_filer=4096, offset="(2.0,0,0)",
