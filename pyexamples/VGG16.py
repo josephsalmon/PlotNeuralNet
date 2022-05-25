@@ -67,7 +67,7 @@ arch = [
 
     # sigmoid
     to_SoftMax(name="sg", s_filer="L", n_filer="", offset="(1.25,0,0)", to="(fc3-east)",
-               width=1, height=1, depth=20, caption="SIGMOID", opacity=1.0),
+               width=1, height=1, depth=15, caption="SIGMOID", opacity=1.0),
 
     # connections
     to_connection("p1", "cr2"),
