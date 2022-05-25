@@ -15,7 +15,8 @@ arch = [
     # to_input('../examples/fcn8s/cats.jpg'),
     # Pl@ntnet image: 1355936,Cirsium arvense,Cirsium,3418,12075
 
-    to_input('cf7315479b5bebc714b824045f729868d8b6ca73.jpg'),
+    to_input('cf7315479b5bebc714b824045f729868d8b6ca73.jpg',
+             name="Cirsium arvense"),
     # to_input('d80a7c1334c62039e8c9b6d0b98256c16c0de30e.jpg'),
 
     # conv1
@@ -67,7 +68,7 @@ arch = [
 
     # sigmoid
     to_SoftMax(name="sg", s_filer="L", n_filer="", offset="(1.25,0,0)", to="(fc3-east)",
-               width=1, height=1, depth=15, caption="SIGMOID", opacity=1.0),
+               width=1, height=1, depth=15, caption="Softmax", opacity=1.0),
 
     # connections
     to_connection("p1", "cr2"),
@@ -81,6 +82,7 @@ arch = [
     to_connection("fc3", "sg"),
     to_connection("sg", "++(1.5,0,0)", to_dir=''),
 
+    to_legend(),
     to_end()
 ]
 

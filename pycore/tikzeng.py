@@ -6,6 +6,7 @@ def to_head(projectpath):
     pathlayers = os.path.join(projectpath, 'layers/').replace('\\', '/')
     return r"""
 \documentclass[border=8pt, multi, tikz]{standalone} 
+\usepackage{tkz-graph}
 \usepackage{import}
 \subimport{""" + pathlayers + r"""}{init}
 \usetikzlibrary{positioning}
@@ -31,7 +32,16 @@ def to_begin():
 \newcommand{\copymidarrow}{\tikz \draw[-Stealth,line width=0.8mm,draw={rgb:blue,4;red,1;green,1;black,3}] (-0.3,0) -- ++(0.3,0);}
 
 \begin{document}
-\begin{tikzpicture}
+\begin{tikzpicture}[
+  convnode/.style={shape=rectangle, opacity=0.8, fill=\ConvReluColor, minimum width = 2cm, 
+    minimum height = 1cm},
+  poolnode/.style={shape=rectangle, opacity=0.5, fill=\PoolColor, minimum width = 2cm, 
+    minimum height = 1cm},
+  fcnode/.style={shape=rectangle, opacity=0.8, fill=\FcColor, minimum width = 2cm, 
+    minimum height = 1cm},
+  softmaxnode/.style={shape=rectangle, opacity=0.8, fill=\SoftmaxColor, minimum width = 2cm, 
+    minimum height = 1cm}
+]
 \tikzstyle{connection}=[ultra thick,every node/.style={sloped,allow upside down},draw=\edgecolor,opacity=0.7]
 \tikzstyle{copyconnection}=[ultra thick,every node/.style={sloped,allow upside down},draw={rgb:blue,4;red,1;green,1;black,3},opacity=0.7]
 """
@@ -41,6 +51,8 @@ def to_begin():
 
 def to_input(pathfile, to='(-3,0,0)', width=8, height=8, name="temp"):
     return r"""
+
+\node[canvas is zy plane at x=0] (name) at (-3, -6, 0) {TOTOTOO};
 \node[canvas is zy plane at x=0] (""" + name + """) at """ + to + """ {\includegraphics[width=""" + str(width)+"cm"+""",height=""" + str(height)+"cm"+"""]{""" + pathfile + """}};
 """
 
@@ -227,6 +239,17 @@ def to_skip(of, to, pos=1.25):
 -- node {\copymidarrow}("""+of+"""-top)
 -- node {\copymidarrow}("""+to+"""-top)
 -- node {\copymidarrow} ("""+to+"""-north);
+"""
+
+
+def to_legend():
+    return r"""
+  \matrix [draw,below left, column sep=1cm, row sep=0.3cm, nodes={font=\huge}] at (current bounding box.south east) {
+  \node [convnode,label=right:Conv ($3 \times 3$) + ReLu] {}; &
+  \node [poolnode,label=right:Max. Pooling ($2 \times 2$)] {}; &\\
+  \node [fcnode,label=right:Fully Connected] {}; &
+  \node [softmaxnode,label=right:Softmax] {}; \\
+};
 """
 
 
