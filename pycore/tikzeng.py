@@ -8,7 +8,7 @@ def to_head(projectpath):
 \documentclass[border=8pt, multi, tikz]{standalone} 
 \usepackage{tkz-graph}
 
-% Preambule to match presentation style
+% Preambule to match presentation 
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage{color}
 \usepackage[scaled]{beramono}
@@ -59,11 +59,8 @@ def to_begin():
 
 
 def to_input(pathfile, to='(-3,0,0)', width=8, height=8, name="temp"):
-    return r"""
-
-\node[canvas is zy plane at x=0,font=\Huge] (name) at (-3, -5, 0) {\reflectbox{\textbf{Cirsium arvense}}};
-\node[canvas is zy plane at x=0] (""" + name + """) at """ + to + """ {\includegraphics[width=""" + str(width)+"cm"+""",height=""" + str(height)+"cm"+"""]{""" + pathfile + """}};
-"""
+    return r"""\node[canvas is zy plane at x=0,font=\Huge] ("""+name+r""") at (-3, -5, 0) {\reflectbox{\textbf{"""+str(name)+r"""}}};
+    \node[canvas is zy plane at x=0] (""" + name + """) at """ + to + """ {\includegraphics[width=""" + str(width)+"cm"+""",height=""" + str(height)+"cm"+"""]{""" + pathfile + """}};"""
 
 # Conv
 
