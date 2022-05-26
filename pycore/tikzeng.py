@@ -7,6 +7,14 @@ def to_head(projectpath):
     return r"""
 \documentclass[border=8pt, multi, tikz]{standalone} 
 \usepackage{tkz-graph}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{color}
+% \usepackage{mathspec}
+\usepackage[scaled]{beramono}
+\usepackage[sfdefault]{AlegreyaSans}
+\usepackage[italic]{mathastext}
+
+\usepackage{graphicx}
 \usepackage{import}
 \subimport{""" + pathlayers + r"""}{init}
 \usetikzlibrary{positioning}
@@ -52,7 +60,7 @@ def to_begin():
 def to_input(pathfile, to='(-3,0,0)', width=8, height=8, name="temp"):
     return r"""
 
-\node[canvas is zy plane at x=0] (name) at (-3, -6, 0) {TOTOTOO};
+\node[canvas is zy plane at x=0,font=\Huge] (name) at (-3, -5, 0) {\reflectbox{\textbf{Cirsium arvense}}};
 \node[canvas is zy plane at x=0] (""" + name + """) at """ + to + """ {\includegraphics[width=""" + str(width)+"cm"+""",height=""" + str(height)+"cm"+"""]{""" + pathfile + """}};
 """
 
