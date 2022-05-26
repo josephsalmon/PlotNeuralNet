@@ -7,9 +7,10 @@ def to_head(projectpath):
     return r"""
 \documentclass[border=8pt, multi, tikz]{standalone} 
 \usepackage{tkz-graph}
+
+% Preambule to match presentation style
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage{color}
-% \usepackage{mathspec}
 \usepackage[scaled]{beramono}
 \usepackage[sfdefault]{AlegreyaSans}
 \usepackage[italic]{mathastext}
